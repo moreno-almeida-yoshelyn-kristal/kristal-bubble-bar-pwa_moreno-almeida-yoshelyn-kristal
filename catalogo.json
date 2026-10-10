@@ -1,0 +1,17 @@
+[
+  {"id":1,"nombre":"Taro","categoria":"Bubble tea","precio":75,"stock":20,"imagen":"img/taro.jpg"},
+  {"id":2,"nombre":"Milk tea clásico","categoria":"Bubble tea","precio":70,"stock":20,"imagen":"img/milk-tea-clasico.jpg"},
+  {"id":3,"nombre":"Matcha","categoria":"Bubble tea","precio":80,"stock":20,"imagen":"img/matcha.jpg"},
+  {"id":4,"nombre":"Brown sugar","categoria":"Bubble tea","precio":85,"stock":20,"imagen":"img/brown-sugar.jpg"},
+  {"id":5,"nombre":"Fresa con popping boba","categoria":"Bubble tea","precio":80,"stock":20,"imagen":"img/fresa-con-popping-boba.jpg"},
+  {"id":6,"nombre":"Moka","categoria":"Frappés","precio":75,"stock":20,"imagen":"img/moka.jpg"},
+  {"id":7,"nombre":"Cookies & cream","categoria":"Frappés","precio":80,"stock":20,"imagen":"img/cookies-cream.jpg"},
+  {"id":8,"nombre":"Caramelo","categoria":"Frappés","precio":75,"stock":20,"imagen":"img/caramelo.jpg"},
+  {"id":9,"nombre":"Mazapán","categoria":"Frappés","precio":75,"stock":20,"imagen":"img/mazapan.jpg"},
+  {"id":10,"nombre":"Chai","categoria":"Frappés","precio":75,"stock":20,"imagen":"img/chai.jpg"},
+  {"id":11,"nombre":"Mango-maracuyá","categoria":"Smoothies","precio":70,"stock":20,"imagen":"img/mango-maracuya.jpg"},
+  {"id":12,"nombre":"Frutos rojos","categoria":"Smoothies","precio":70,"stock":20,"imagen":"img/frutos-rojos.jpg"},
+  {"id":13,"nombre":"Verde detox","categoria":"Smoothies","precio":70,"stock":20,"imagen":"img/verde-detox.jpg"},
+  {"id":14,"nombre":"Piña colada (sin alcohol)","categoria":"Smoothies","precio":70,"stock":20,"imagen":"img/pina-colada-sin-alcohol.jpg"},
+  {"id":15,"nombre":"Plátano con crema de cacahuate","categoria":"Smoothies","precio":75,"stock":20,"imagen":"img/platano-con-crema-de-cacahuate.jpg"}
+]

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kristal Bubble Bar — Catálogo</title>
+  <meta name="description" content="Kristal Bubble Bar: frappés, smoothies y bubble tea. Catálogo de productos, carrito de compras y ubicación de la sucursal, disponible incluso sin conexión.">
+
+  <!-- AVANCE 3: estas 3 líneas convierten el sitio en una PWA instalable (descomentar cuando existan manifest.json e icons/icon.svg) -->
+  <!-- <link rel="manifest" href="manifest.json"> -->
+  <!-- <meta name="theme-color" content="#6EE7B7"> -->
+  <!-- <link rel="icon" href="icons/icon.svg" type="image/svg+xml"> -->
+
+  <!-- Tipografía con serifas (la misma de tu menú) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" href="img/vasito.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/estilos.css">
+
+  <!-- AVANCE 3: Leaflet (mapas) para geolocalizacion.js -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"> -->
+</head>
+<body>
+
+  <!-- ============ APP SHELL ============
+       El esqueleto que SIEMPRE se ve igual: encabezado, zona del catálogo y pie.
+       El Service Worker lo cacheará completo; solo los DATOS los llena JavaScript. -->
+
+  <header class="appbar">
+    <!-- AVANCE 3: este <span> lo actualiza app.js (conectado / sin conexión) -->
+    <!-- <span id="estado-conexion" class="pill">conectado</span> -->
+    <img src="img/logo.png" alt="Logo de Kristal Bubble Bar" class="appbar__logo" width="170" height="170">
+    
+    <h1 class="marca"><span class="marca__a">Kristal</span> <span class="marca__b">Bubble Bar</span></h1>
+    <p class="lema">Frappés, smoothies y bubble tea</p>
+  </header>
+
+  <main>
+    <!-- ---- Sección 1: Catálogo (CSR) ---- -->
+    <section class="panel">
+      <h2 class="titulo-pill">Nuestro menú</h2>
+
+      <!-- Producto estrella (csr.js llena precio y foto desde catalogo.json) -->
+      <article class="destacado">
+        <div class="destacado__texto">
+          <span class="destacado__etiqueta">★ Producto estrella</span>
+          <h3>Brown Sugar <span class="degradado">Milk Tea</span></h3>
+          <p>Leche fresca con perlas de tapioca morena que forman 'rayas de tigre' en el vaso. ¡Una experiencia dulce, cremosa e irresistible!</p>
+          <div class="destacado__compra">
+            <span class="destacado__precio">$<span id="destacado-precio">85</span> <small>MXN</small></span>
+            <button type="button" id="destacado-btn">Agregar al carrito</button>
+          </div>
+        </div>
+        <div class="destacado__foto">
+          <span class="destacado__insignia">🔥 #1 Más vendido</span>
+          <img id="destacado-img" src="img/brown-sugar.jpg" alt="Brown Sugar Milk Tea" width="240" height="300">
+        </div>
+      </article>
+
+      <!-- Este div empieza con 4 tarjetas "esqueleto". csr.js las reemplaza
+           por los 15 productos reales cuando llega catalogo.json -->
+      <div id="catalogo" class="grid" aria-busy="true" aria-label="Cargando catálogo">
+        <div class="producto producto--cargando" aria-hidden="true">
+          <div class="producto__foto"></div>
+          <strong>&nbsp;</strong> <span class="precio">&nbsp;</span> <p>&nbsp;</p>
+          <button type="button" disabled>Agregar al carrito</button>
+        </div>
+        <div class="producto producto--cargando" aria-hidden="true">
+          <div class="producto__foto"></div>
+          <strong>&nbsp;</strong> <span class="precio">&nbsp;</span> <p>&nbsp;</p>
+          <button type="button" disabled>Agregar al carrito</button>
+        </div>
+        <div class="producto producto--cargando" aria-hidden="true">
+          <div class="producto__foto"></div>
+          <strong>&nbsp;</strong> <span class="precio">&nbsp;</span> <p>&nbsp;</p>
+          <button type="button" disabled>Agregar al carrito</button>
+        </div>
+        <div class="producto producto--cargando" aria-hidden="true">
+          <div class="producto__foto"></div>
+          <strong>&nbsp;</strong> <span class="precio">&nbsp;</span> <p>&nbsp;</p>
+          <button type="button" disabled>Agregar al carrito</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- AVANCE 2: Sección 2: Carrito (descomentar junto con js/carrito.js)
+    <section>
+      <h2 class="titulo-pill">Carrito</h2>
+      <ul id="carrito-lista"></ul>
+      <p>Total: $<span id="carrito-total">0</span></p>
+      <button id="btn-sincronizar" type="button">Sincronizar carrito</button>
+      <p id="carrito-mensaje" class="mensaje"></p>
+    </section>
+    -->
+
+    <!-- AVANCE 3: Sección 3: Notificaciones (descomentar junto con js/notificaciones.js)
+    <section>
+      <h2 class="titulo-pill">Notificaciones de ofertas</h2>
+      <button id="btn-notificar" type="button">Activar notificaciones</button>
+      <p id="notificaciones-mensaje" class="mensaje"></p>
+    </section>
+    -->
+
+    <!-- AVANCE 3: Sección 4: Ubicación (descomentar junto con Leaflet y js/geolocalizacion.js)
+    <section>
+      <h2 class="titulo-pill">Distancia a la sucursal</h2>
+      <p class="sucursal-info">Sucursal única: <strong>Kristal Bubble Bar</strong>, Av. Banamichi #398.</p>
+      <button id="btn-ubicacion" type="button">Usar mi ubicación</button>
+      <p id="ubicacion-mensaje" class="mensaje"></p>
+      <div id="mapa-ruta" class="mapa" hidden></div>
+    </section>
+    -->
+  </main>
+
+  <footer class="pie">
+  <div class="pie__info">
+
+    <div class="pie__item">
+      <svg class="pie__icono" viewBox="0 0 48 48" aria-hidden="true">
+        <circle cx="24" cy="24" r="19" fill="#fde4f1" stroke="#F9A8D4" stroke-width="4"/>
+        <path d="M24 13v11l7 5" fill="none" stroke="#F9A8D4" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <p><strong>Horario: Lun-Dom</strong><br>11 am - 9 pm</p>
+    </div>
+
+    <div class="pie__item">
+      <svg class="pie__icono" viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M24 44S10 29 10 19a14 14 0 0 1 28 0c0 10-14 25-14 25z" fill="#fde4f1" stroke="#F9A8D4" stroke-width="4" stroke-linejoin="round"/>
+        <circle cx="24" cy="19" r="5" fill="#F9A8D4"/>
+      </svg>
+      <p><strong>Ubicación</strong><br>Av. Banamichi #398</p>
+    </div>
+
+    <div class="pie__item">
+      <span class="pie__iconos" aria-hidden="true">
+        <svg class="pie__icono" viewBox="0 0 48 48">
+          <rect x="6" y="6" width="36" height="36" rx="11" fill="none" stroke="#F9A8D4" stroke-width="4"/>
+          <circle cx="24" cy="24" r="8" fill="none" stroke="#F9A8D4" stroke-width="4"/>
+          <circle cx="34.5" cy="13.5" r="2.5" fill="#F9A8D4"/>
+        </svg>
+        <svg class="pie__icono" viewBox="0 0 48 48">
+          <circle cx="24" cy="24" r="20" fill="#F9A8D4"/>
+          <path d="M26 38V26h4.5l.8-5H26v-3c0-1.5.7-2.5 2.6-2.5h2.8V11c-.5-.1-2.2-.3-4.1-.3-4.1 0-6.8 2.5-6.8 7V21H16v5h4.5v12z" fill="#fff"/>
+        </svg>
+      </span>
+      <p><strong>Redes Sociales</strong><br>@kristal.bubble-tea</p>
+    </div>
+
+  </div>
+</footer>
+
+  <!-- Scripts al final del <body>, para que el HTML ya exista cuando corran.
+       Solo csr.js está activo en el avance 1; los demás se activan al crear cada archivo. -->
+  <!-- AVANCE 2: <script src="js/carrito.js"></script> (debe ir ANTES de csr.js) -->
+  <!-- <script src="js/carrito.js"></script> -->
+  <script src="js/csr.js"></script>
+  <!-- AVANCE 3 -->
+  <!-- <script src="js/notificaciones.js"></script> -->
+  <!-- Leaflet debe cargar ANTES de geolocalizacion.js -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script> -->
+  <!-- <script src="js/geolocalizacion.js"></script> -->
+  <!-- <script src="js/app.js"></script> -->
+  <!-- AVANCE 3: registro del Service Worker (una sola línea de register("sw.js") para que PWABuilder lo detecte)
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js")
+        .then((registro) => console.log("Service Worker registrado con éxito:", registro.scope))
+        .catch((error) => console.error("No se pudo registrar el Service Worker:", error));
+    }
+  </script>
+  -->
+</body>
+</html>
