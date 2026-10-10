@@ -27,4 +27,4 @@ Adolescentes y jóvenes que buscan bebidas diferentes y "instagrameables".
 
 | Avance | Hash del commit entregado | Fecha |
 |---|---|---|
-| 1 | () | 11/10/2026 |
+| 1 | (d96f777) | 11/10/2026 |
