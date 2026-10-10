@@ -16,4 +16,4 @@
 
 | Avance | Hash del commit entregado | Fecha |
 |---|---|---|
-| 1 | (d96f777) | 10/10/2026 |
+| 1 | d96f777 | 10/10/2026 |
