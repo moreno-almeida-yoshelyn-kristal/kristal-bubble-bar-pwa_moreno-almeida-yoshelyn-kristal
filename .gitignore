@@ -1,0 +1,4 @@
+   servidor-ssr/venv/
+   servidor-ssr/db.sqlite3
+   __pycache__/
+   *.pyc
