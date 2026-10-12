@@ -320,6 +320,7 @@ button:focus-visible { outline: 3px solid var(--menta); outline-offset: 2px; }
 .filtros {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;   
   gap: .6rem;
   margin-bottom: 1rem;
 }

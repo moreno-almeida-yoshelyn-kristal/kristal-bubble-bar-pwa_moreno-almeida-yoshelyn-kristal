@@ -19,6 +19,7 @@ fetch("catalogo.json")
       // creamos un <div class="producto"> por cada producto, desde JavaScript puro
       const tarjeta = document.createElement("div");
       tarjeta.className = "producto";
+      tarjeta.dataset.categoria = producto.categoria; // guarda la categoría para el filtro
 
       // usamos el propio objeto "producto" para llenar el texto (sin plantillas de servidor)
       tarjeta.innerHTML = `
@@ -32,11 +33,13 @@ fetch("catalogo.json")
       contenedorCatalogo.appendChild(tarjeta);
 
       // conectamos el botón recién creado con la función agregarAlCarrito() de carrito.js
-      // (carrito.js se crea en el avance 2; mientras no exista, el botón no hace nada)
       tarjeta.querySelector("button").addEventListener("click", () => {
         if (typeof agregarAlCarrito === "function") agregarAlCarrito(producto);
       });
     });
+
+    // Botones de categoría: FUERA del forEach para que se creen una sola vez
+    crearFiltros(productos);
 
     // Producto estrella: FUERA del forEach, para que se ejecute una sola vez
     crearDestacado(productos);
@@ -48,6 +51,41 @@ fetch("catalogo.json")
     contenedorCatalogo.removeAttribute("aria-label");
     console.error("Error al cargar catálogo:", error);
   });
+
+// Crea los botones "Todos" + uno por categoría (Bubble tea, Frappés, Smoothies)
+// y oculta las tarjetas que no coinciden con la categoría elegida
+function crearFiltros(productos) {
+  // lista de categorías sin repetir, en el orden en que aparecen en catalogo.json
+  const categorias = [...new Set(productos.map((p) => p.categoria))];
+
+  const barra = document.createElement("div");
+  barra.className = "filtros";
+  barra.setAttribute("role", "group");
+  barra.setAttribute("aria-label", "Filtrar por categoría");
+
+  ["Todos", ...categorias].forEach((categoria) => {
+    const boton = document.createElement("button");
+    boton.type = "button";
+    boton.textContent = categoria;
+    boton.setAttribute("aria-pressed", categoria === "Todos" ? "true" : "false");
+
+    boton.addEventListener("click", () => {
+      // marcamos solo el botón activo
+      barra.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", "false"));
+      boton.setAttribute("aria-pressed", "true");
+
+      // mostramos u ocultamos cada tarjeta según su data-categoria
+      contenedorCatalogo.querySelectorAll(".producto").forEach((tarjeta) => {
+        tarjeta.hidden = categoria !== "Todos" && tarjeta.dataset.categoria !== categoria;
+      });
+    });
+
+    barra.appendChild(boton);
+  });
+
+  // la barra va justo antes del contenedor del catálogo
+  contenedorCatalogo.before(barra);
+}
 
 // Llena el producto estrella con los datos de catalogo.json
 function crearDestacado(productos) {
