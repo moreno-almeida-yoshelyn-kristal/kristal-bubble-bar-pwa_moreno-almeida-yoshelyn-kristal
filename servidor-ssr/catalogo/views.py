@@ -25,17 +25,10 @@ def vista_ssr(request):
     """
     Vista con Renderizado en Servidor (SSR).
 
-    Agrupa los productos por categoría y se los manda a la plantilla.
-    render() mezcla la plantilla con estos datos y devuelve el HTML final,
-    YA CON los nombres y precios escritos (Ctrl+U los muestra en el código fuente).
+    render() toma la plantilla 'catalogo/catalogo_ssr.html', le inyecta la lista
+    de productos y devuelve el HTML final YA CON los nombres y precios escritos.
+    Por eso Ctrl+U muestra los productos en el código fuente, a diferencia de la
+    versión CSR, donde el HTML llega vacío y JavaScript los dibuja después.
     """
-    categorias = []
-    for producto in PRODUCTOS:
-        grupo = next((c for c in categorias if c["nombre"] == producto["categoria"]), None)
-        if grupo is None:
-            grupo = {"nombre": producto["categoria"], "productos": []}
-            categorias.append(grupo)
-        grupo["productos"].append(producto)
-
-    contexto = {"categorias": categorias, "total": len(PRODUCTOS)}
+    contexto = {"productos": PRODUCTOS}
     return render(request, "catalogo/catalogo_ssr.html", contexto)
