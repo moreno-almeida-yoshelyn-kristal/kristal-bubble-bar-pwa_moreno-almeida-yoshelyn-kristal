@@ -6,15 +6,46 @@
   <title>Kristal Bubble Bar — Catálogo (SSR)</title>
   <style>
     /* Estilos mínimos con la paleta de Kristal Bubble Bar */
-    body { font-family: system-ui, sans-serif; background: #faf5ff; color: #2a1740; margin: 0; }
+    body { font-family: system-ui, sans-serif; background: #faf5ff; color: #A855F7; margin: 0; }
     header { background: #6ee7b7; padding: 1.25rem 1rem; text-align: center; border-bottom: 5px solid #f9a8d4; }
-    h1 { margin: 0; color: #4c1d95; font-size: 1.6rem; }
+    h1 { margin: 0; color: #A855F7; font-size: 1.6rem; }
     main { max-width: 720px; margin: 1.5rem auto; padding: 0 1rem; }
-    .aviso { color: #5b4a70; font-size: .95rem; }
-    ul { list-style: none; padding: 0; }
-    li { display: flex; justify-content: space-between; gap: 1rem; background: #fff; border: 1px solid #e9d5ff; border-radius: 10px; padding: .75rem 1rem; margin-bottom: .5rem; }
-    .precio { font-weight: bold; color: #7e22ce; white-space: nowrap; }
-    small { color: #5b4a70; }
+
+    .grid { margin: 0; }
+
+    /* Las tres columnas: se comparten entre encabezado y filas */
+    .encabezado,
+    article {
+      display: grid;
+      grid-template-columns: 1fr 120px 90px; /* producto | categoría | precio */
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .encabezado {
+      padding: 0 1rem .5rem;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #7e22ce;
+    }
+    .encabezado span:nth-child(2) { text-align: center; }
+    .encabezado span:nth-child(3) { text-align: right; }
+
+    article { background: #fff; border: 1px solid #e9d5ff; border-radius: 10px; padding: .75rem 1rem; margin-bottom: .5rem; }
+    article h3 { margin: 0; font-size: 1rem; }
+    article p { margin: 0; }
+
+    .categoria { text-align: center; background: #6EE7B7; color: #A855F7; border-radius: 999px; padding: .1rem .6rem; font-size: .8rem; font-weight: 500; }
+    .precio { text-align: right; font-weight: bold; color: #A855F7; white-space: nowrap; }
+    small { color: #A855F7; font-weight: normal; }
+
+    /* Celular: columnas más angostas para que el nombre no se apriete */
+    @media (max-width: 480px) {
+      .encabezado,
+      article { grid-template-columns: 1fr 100px 75px; gap: .5rem; }
+    }
   </style>
 </head>
 <body>
@@ -23,15 +54,21 @@
   </header>
 
   <main>
+    <div class="encabezado">
+      <span>Producto</span>
+      <span>Categoría</span>
+      <span>Precio</span>
+    </div>
 
-    <ul>
+    <div class="grid">
       {% for producto in productos %}
-        <li>
-          <span><strong>{{ producto.nombre }}</strong> <small>(stock: {{ producto.stock }})</small></span>
-          <span class="precio">${{ producto.precio }}</span>
-        </li>
+        <article>
+          <h3>{{ producto.nombre }} <small>(stock: {{ producto.stock }})</small></h3>
+          <span class="categoria">{{ producto.categoria }}</span>
+          <p class="precio">${{ producto.precio }}</p>
+        </article>
       {% endfor %}
-    </ul>
+    </div>
   </main>
 </body>
 </html>
