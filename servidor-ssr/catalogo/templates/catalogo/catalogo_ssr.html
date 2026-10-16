@@ -23,10 +23,8 @@
   </header>
 
   <main>
-    <!-- <p class="aviso">Catálogo renderizado en el servidor (SSR): este HTML ya viene con los productos escritos. Presiona Ctrl+U para comprobarlo.</p> -->
 
     <ul>
-      <!-- El bucle recorre la lista de productos que la vista mandó en el contexto -->
       {% for producto in productos %}
         <li>
           <span><strong>{{ producto.nombre }}</strong> <small>(stock: {{ producto.stock }})</small></span>
