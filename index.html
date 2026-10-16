@@ -24,9 +24,18 @@
 </head>
 <body>
 
-  <!-- ============ APP SHELL ============
-       El esqueleto que SIEMPRE se ve igual: encabezado, zona del catálogo y pie.
-       El Service Worker lo cacheará completo; solo los DATOS los llena JavaScript. -->
+   <!-- Burbujas decorativas que suben de abajo hacia arriba -->
+  <div class="burbujas" aria-hidden="true">
+    <span style="--x:6%;  --t:46px; --c:rgba(110,231,183,.50); --d:16s; --r:-2s"></span>
+    <span style="--x:16%; --t:22px; --c:rgba(249,168,212,.55); --d:11s; --r:-7s"></span>
+    <span style="--x:27%; --t:34px; --c:rgba(168,85,247,.28);  --d:14s; --r:-4s"></span>
+    <span style="--x:38%; --t:18px; --c:rgba(110,231,183,.55); --d:10s; --r:-9s"></span>
+    <span style="--x:52%; --t:40px; --c:rgba(249,168,212,.45); --d:18s; --r:-1s"></span>
+    <span style="--x:63%; --t:26px; --c:rgba(168,85,247,.25);  --d:12s; --r:-6s"></span>
+    <span style="--x:74%; --t:50px; --c:rgba(110,231,183,.45); --d:17s; --r:-11s"></span>
+    <span style="--x:84%; --t:20px; --c:rgba(249,168,212,.55); --d:9s;  --r:-3s"></span>
+    <span style="--x:92%; --t:36px; --c:rgba(168,85,247,.30);  --d:15s; --r:-8s"></span>
+  </div>
 
   <header class="appbar">
     <!-- AVANCE 3: este <span> lo actualiza app.js (conectado / sin conexión) -->
@@ -59,8 +68,6 @@
         </div>
       </article>
 
-      <!-- Este div empieza con 4 tarjetas "esqueleto". csr.js las reemplaza
-           por los 15 productos reales cuando llega catalogo.json -->
       <div id="catalogo" class="grid" aria-busy="true" aria-label="Cargando catálogo">
         <div class="producto producto--cargando" aria-hidden="true">
           <div class="producto__foto"></div>
@@ -150,9 +157,6 @@
 
   </div>
 </footer>
-
-  <!-- Scripts al final del <body>, para que el HTML ya exista cuando corran.
-       Solo csr.js está activo en el avance 1; los demás se activan al crear cada archivo. -->
   
   <script src="js/carrito.js"></script> 
   <script src="js/csr.js"></script>
