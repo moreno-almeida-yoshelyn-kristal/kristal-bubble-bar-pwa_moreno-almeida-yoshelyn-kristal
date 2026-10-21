@@ -15,19 +15,56 @@ function guardarCarrito(carrito) {
   localStorage.setItem(CLAVE_CARRITO, JSON.stringify(carrito));
 }
 
+// NUEVO: muestra un aviso (toast) que aparece, se queda unos segundos y desaparece solo.
+// El contenedor se crea la primera vez, así que no hace falta tocar el HTML.
+function mostrarToast(mensaje) {
+  let contenedor = document.getElementById("toasts");
+  if (!contenedor) {
+    contenedor = document.createElement("div");
+    contenedor.id = "toasts";
+    contenedor.setAttribute("role", "status");     // los lectores de pantalla lo anuncian
+    contenedor.setAttribute("aria-live", "polite");
+    document.body.appendChild(contenedor);
+  }
+
+  const toast = document.createElement("div");
+  toast.className = "toast";
+
+  const icono = document.createElement("span");
+  icono.className = "toast__icono";
+  icono.textContent = "✓";
+
+  const texto = document.createElement("span");
+  texto.textContent = mensaje; // textContent (no innerHTML) para no meter HTML del nombre
+
+  toast.append(icono, texto);
+  contenedor.appendChild(toast);
+
+  // Se quita solo: primero se desvanece y luego se elimina del DOM
+  setTimeout(() => {
+    toast.classList.add("toast--salida");
+    toast.addEventListener("animationend", () => toast.remove(), { once: true });
+  }, 2500);
+}
+
 // Agrega un producto al carrito (o le sube la cantidad si ya estaba)
 function agregarAlCarrito(producto) {
   const carrito = leerCarrito();
   const existente = carrito.find((item) => item.id === producto.id);
 
+  // NUEVO: la foto del producto (según cómo se llame el campo en catalogo.json)
+  const foto = producto.imagen || producto.foto || producto.img || "";
+
   if (existente) {
     existente.cantidad += 1;
+    if (!existente.foto) existente.foto = foto; // por si se agregó antes de guardar fotos
   } else {
-    carrito.push({ id: producto.id, nombre: producto.nombre, precio: producto.precio, cantidad: 1 });
+    carrito.push({ id: producto.id, nombre: producto.nombre, precio: producto.precio, foto: foto, cantidad: 1 });
   }
 
   guardarCarrito(carrito);
   pintarCarrito();
+  mostrarToast(`Agregaste ${producto.nombre} al carrito`); // NUEVO
 }
 
 // Sube o baja la cantidad de un producto ya en el carrito con los botones +/-;
@@ -71,9 +108,14 @@ function pintarCarrito() {
     const subtotal = item.precio * item.cantidad;
     suma += subtotal;
 
+    // NUEVO: si el producto tiene foto, se dibuja dentro de la misma columna del nombre
+    const foto = item.foto
+      ? `<img src="${item.foto}" alt="${item.nombre}" class="carrito-foto" width="48" height="48">`
+      : "";
+
     const li = document.createElement("li");
     li.innerHTML = `
-      <span class="carrito-nombre">${item.nombre}</span>
+      <span class="carrito-nombre">${foto}${item.nombre}</span>
       <span class="carrito-cantidad">
         <button type="button" data-accion="restar" data-id="${item.id}" aria-label="Quitar una unidad de ${item.nombre}">−</button>
         <span class="carrito-cantidad__valor">${item.cantidad}</span>
