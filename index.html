@@ -7,56 +7,60 @@
   <meta name="description" content="Kristal Bubble Bar: frappés, smoothies y bubble tea. Catálogo de productos, carrito de compras y ubicación de la sucursal, disponible incluso sin conexión.">
 
   <!-- AVANCE 3: estas 3 líneas convierten el sitio en una PWA instalable (descomentar cuando existan manifest.json e icons/icon.svg) -->
-  <!-- <link rel="manifest" href="manifest.json"> -->
-  <!-- <meta name="theme-color" content="#6EE7B7"> -->
+  <link rel="manifest" href="manifest.json"> 
+  <meta name="theme-color" content="#6EE7B7">
   <!-- <link rel="icon" href="icons/icon.svg" type="image/svg+xml"> -->
+
+   <!-- Ícono de la pestaña y de iPhone -->
+  <link rel="icon" href="icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
 
   <!-- Tipografía con serifas (la misma de tu menú) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="icon" href="img/vasito.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="css/estilos.css">
 
   <!-- AVANCE 3: Leaflet (mapas) para geolocalizacion.js -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 </head>
 <body>
 
-   <!-- Burbujas decorativas que suben de abajo hacia arriba -->
+  <!-- Burbujas decorativas que suben de abajo hacia arriba -->
   <div class="burbujas" aria-hidden="true">
     <span style="--x:2%;  --t:30px; --c:rgba(110,231,183,.50); --d:15s; --r:-2s"></span>
-    <span style="--x:5%;  --t:44px; --c:rgba(249,168,212,.50); --d:12s; --r:-8s"></span>
-    <span style="--x:9%;  --t:20px; --c:rgba(168,85,247,.28);  --d:17s; --r:-5s"></span>
-    <span style="--x:14%; --t:36px; --c:rgba(110,231,183,.50); --d:11s; --r:-11s"></span>
-    <span style="--x:19%; --t:24px; --c:rgba(249,168,212,.55); --d:14s; --r:-3s"></span>
-    <span style="--x:25%; --t:48px; --c:rgba(168,85,247,.25);  --d:18s; --r:-9s"></span>
-    <span style="--x:31%; --t:18px; --c:rgba(110,231,183,.55); --d:10s; --r:-6s"></span>
-    <span style="--x:37%; --t:32px; --c:rgba(249,168,212,.45); --d:16s; --r:-1s"></span>
-    <span style="--x:43%; --t:42px; --c:rgba(168,85,247,.30);  --d:13s; --r:-12s"></span>
-    <span style="--x:49%; --t:22px; --c:rgba(110,231,183,.45); --d:9s;  --r:-4s"></span>
-    <span style="--x:55%; --t:38px; --c:rgba(249,168,212,.55); --d:19s; --r:-7s"></span>
-    <span style="--x:60%; --t:26px; --c:rgba(168,85,247,.28);  --d:12s; --r:-10s"></span>
-    <span style="--x:64%; --t:46px; --c:rgba(110,231,183,.50); --d:15s; --r:-3s"></span>
-    <span style="--x:66%; --t:20px; --c:rgba(249,168,212,.50); --d:10s; --r:-9s"></span>
-    <span style="--x:70%; --t:34px; --c:rgba(168,85,247,.25);  --d:17s; --r:-6s"></span>
-    <span style="--x:75%; --t:50px; --c:rgba(110,231,183,.45); --d:14s; --r:-13s"></span>
-    <span style="--x:80%; --t:24px; --c:rgba(249,168,212,.55); --d:11s; --r:-2s"></span>
-    <span style="--x:84%; --t:40px; --c:rgba(168,85,247,.30);  --d:18s; --r:-8s"></span>
-    <span style="--x:88%; --t:28px; --c:rgba(110,231,183,.50); --d:13s; --r:-5s"></span>
-    <span style="--x:91%; --t:44px; --c:rgba(249,168,212,.45); --d:16s; --r:-11s"></span>
-    <span style="--x:94%; --t:22px; --c:rgba(168,85,247,.28);  --d:10s; --r:-4s"></span>
-    <span style="--x:96%; --t:36px; --c:rgba(110,231,183,.55); --d:15s; --r:-7s"></span>
-    <span style="--x:98%; --t:26px; --c:rgba(249,168,212,.50); --d:12s; --r:-10s"></span>
-    <span style="--x:99%; --t:48px; --c:rgba(168,85,247,.25);  --d:19s; --r:-1s"></span>
+    <span style="--x:8%;  --t:44px; --c:rgba(249,168,212,.50); --d:12s; --r:-8s"></span>
+    <span style="--x:15%; --t:24px; --c:rgba(168,85,247,.28);  --d:17s; --r:-5s"></span>
+    <span style="--x:24%; --t:36px; --c:rgba(110,231,183,.50); --d:11s; --r:-11s"></span>
+    <span style="--x:33%; --t:20px; --c:rgba(249,168,212,.55); --d:14s; --r:-3s"></span>
+    <span style="--x:42%; --t:46px; --c:rgba(168,85,247,.25);  --d:18s; --r:-9s"></span>
+    <span style="--x:50%; --t:28px; --c:rgba(110,231,183,.45); --d:10s; --r:-6s"></span>
+    <span style="--x:58%; --t:38px; --c:rgba(249,168,212,.50); --d:16s; --r:-1s"></span>
+    <span style="--x:64%; --t:22px; --c:rgba(168,85,247,.28);  --d:13s; --r:-12s"></span>
+    <span style="--x:68%; --t:42px; --c:rgba(125,211,252,.45); --d:17s; --r:-4s"></span>
+    <span style="--x:72%; --t:30px; --c:rgba(110,231,183,.50); --d:9s;  --r:-7s"></span>
+    <span style="--x:77%; --t:52px; --c:rgba(249,168,212,.55); --d:20s; --r:-10s"></span>
+
+    <!-- Lado derecho, con más colores -->
+    <span style="--x:80%; --t:24px; --c:rgba(168,85,247,.30);  --d:12s; --r:-2s"></span>
+    <span style="--x:83%; --t:46px; --c:rgba(125,211,252,.40); --d:18s; --r:-8s"></span>
+    <span style="--x:86%; --t:34px; --c:rgba(110,231,183,.50); --d:15s; --r:-5s"></span>
+    <span style="--x:89%; --t:52px; --c:rgba(249,168,212,.50); --d:19s; --r:-13s"></span>
+    <span style="--x:91%; --t:20px; --c:rgba(168,85,247,.28);  --d:10s; --r:-3s"></span>
+    <span style="--x:93%; --t:38px; --c:rgba(125,211,252,.45); --d:16s; --r:-9s"></span>
+    <span style="--x:95%; --t:28px; --c:rgba(110,231,183,.55); --d:13s; --r:-6s"></span>
+    <span style="--x:96%; --t:48px; --c:rgba(249,168,212,.55); --d:17s; --r:-11s"></span>
+    <span style="--x:97%; --t:22px; --c:rgba(168,85,247,.30);  --d:11s; --r:-1s"></span>
+    <span style="--x:98%; --t:36px; --c:rgba(110,231,183,.50); --d:14s; --r:-7s"></span>
+    <span style="--x:99%; --t:44px; --c:rgba(249,168,212,.45); --d:18s; --r:-4s"></span>
+    <span style="--x:100%; --t:26px; --c:rgba(125,211,252,.40); --d:15s; --r:-10s"></span>
   </div>
 
   <header class="appbar">
-    <!-- AVANCE 3: este <span> lo actualiza app.js (conectado / sin conexión) -->
-    <!-- <span id="estado-conexion" class="pill">conectado</span> -->
+    <!-- Indicador de conexión: lo actualiza carrito.js (conectado / sin conexión) -->
+    <span id="estado-conexion" class="pill" role="status" aria-live="polite">conectado</span>
     <img src="img/logo.png" alt="Logo de Kristal Bubble Bar" class="appbar__logo" width="170" height="170">
-    
+
     <h1 class="marca"><span class="marca__a">Kristal</span> <span class="marca__b">Bubble Bar</span></h1>
     <p class="lema">Frappés, smoothies y bubble tea</p>
   </header>
@@ -115,18 +119,17 @@
       <p>Total: $<span id="carrito-total">0</span></p>
       <button id="btn-sincronizar" type="button">Sincronizar carrito</button>
       <p id="carrito-mensaje" class="mensaje"></p>
-    </section>
-    
 
-    <!-- AVANCE 3: Sección 3: Notificaciones (descomentar junto con js/notificaciones.js)
-    <section>
-      <h2 class="titulo-pill">Notificaciones de ofertas</h2>
-      <button id="btn-notificar" type="button">Activar notificaciones</button>
-      <p id="notificaciones-mensaje" class="mensaje"></p>
+      <!-- Notificaciones (paso 15): botón para pedir permiso; las envía js/notificaciones.js -->
+      <div class="notificaciones">
+        <p class="notificaciones__texto">Recibe un aviso cuando agregues un pedido.</p>
+        <button id="btn-notificar" type="button">Activar notificaciones</button>
+        <p id="notificaciones-mensaje" class="mensaje"></p>
+      </div>
     </section>
-    -->
 
-    <!-- AVANCE 3: Sección 4: Ubicación (descomentar junto con Leaflet y js/geolocalizacion.js)
+
+    <!-- Ubicación (paso 16): geolocalizacion.js dibuja el mapa y la ruta hasta la sucursal -->
     <section>
       <h2 class="titulo-pill">Distancia a la sucursal</h2>
       <p class="sucursal-info">Sucursal única: <strong>Kristal Bubble Bar</strong>, Av. Banamichi #398.</p>
@@ -134,7 +137,6 @@
       <p id="ubicacion-mensaje" class="mensaje"></p>
       <div id="mapa-ruta" class="mapa" hidden></div>
     </section>
-    -->
   </main>
 
   <footer class="pie">
@@ -173,14 +175,14 @@
 
   </div>
 </footer>
-  
-  <script src="js/carrito.js"></script> 
+
+  <script src="js/carrito.js"></script>
   <script src="js/csr.js"></script>
   <!-- AVANCE 3 -->
-  <!-- <script src="js/notificaciones.js"></script> -->
+  <script src="js/notificaciones.js"></script>
   <!-- Leaflet debe cargar ANTES de geolocalizacion.js -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script> -->
-  <!-- <script src="js/geolocalizacion.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="js/geolocalizacion.js"></script>
   <!-- <script src="js/app.js"></script> -->
   <!-- AVANCE 3: registro del Service Worker (una sola línea de register("sw.js") para que PWABuilder lo detecte)
   <script>

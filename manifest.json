@@ -1,0 +1,28 @@
+{
+  "id": "./",
+  "name": "Kristal Bubble Bar",
+  "short_name": "Kristal",
+  "description": "Frappés, smoothies y bubble tea: catálogo, carrito y ubicación de Kristal Bubble Bar, disponible incluso sin conexión.",
+  "lang": "es",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "categories": ["food", "shopping"],
+  "background_color": "#fff8fc",
+  "theme_color": "#6ee7b7",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
