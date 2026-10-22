@@ -523,6 +523,8 @@ main > .carrito {
   display: flex;
   align-items: center;
   gap: .6rem;
+  min-width: 9.5rem;        /* asegura que quepa "cacahuate" completo */
+  overflow-wrap: normal;
 }
 #carrito-lista .carrito-foto {
   width: 48px;
@@ -592,5 +594,72 @@ main > .carrito {
   margin-bottom: .6rem;           /* espacio entre un producto y otro */
   background: #fff;
 }
+.appbar { position: relative; }
 
+#estado-conexion {
+  position: absolute;
+  top: .9rem;
+  right: 1rem;         
+  left: auto;          
+  width: fit-content;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .3rem .85rem;
+  background: rgba(255, 255, 255, .85);
+  color: #5b21b6;
+  font-size: .85rem;
+  font-weight: 700;
+  border-radius: 999px;
+}
 
+#estado-conexion::before {
+  content: "";
+  width: .55rem;
+  height: .55rem;
+  border-radius: 50%;
+  background: #22c55e;          /* verde = conectado */
+}
+
+#estado-conexion.pill--offline {
+  background: #f9a8d4;
+  color: #5b1740;
+}
+#estado-conexion.pill--offline::before {
+  background: #e11d48;          /* rojo = sin conexión */
+}
+.notificaciones {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px dashed #f9a8d4;
+}
+.notificaciones__texto { margin: 0 0 .6rem; }
+
+/* #btn-notificar ya no lleva color propio: usa el estilo general de button */
+#btn-notificar:disabled { opacity: 1; cursor: default; }
+#carrito-lista .carrito-cantidad {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: .3rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+#carrito-lista .carrito-nombre {
+  min-width: 0;           /* deja que el nombre se achique y baje de renglón */
+  overflow-wrap: anywhere;
+}
+
+#carrito-lista .carrito-foto {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+#carrito-lista .carrito-cantidad button {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1;
+}

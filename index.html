@@ -19,10 +19,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <link rel="stylesheet" href="css/estilos.css">
 
   <!-- AVANCE 3: Leaflet (mapas) para geolocalizacion.js -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  
 </head>
 <body>
 
@@ -183,8 +184,7 @@
   <!-- Leaflet debe cargar ANTES de geolocalizacion.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script src="js/geolocalizacion.js"></script>
-  <!-- <script src="js/app.js"></script> -->
-  <!-- AVANCE 3: registro del Service Worker (una sola línea de register("sw.js") para que PWABuilder lo detecte)
+  <script src="js/app.js"></script>
   <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("sw.js")
@@ -192,6 +192,6 @@
         .catch((error) => console.error("No se pudo registrar el Service Worker:", error));
     }
   </script>
-  -->
+  
 </body>
 </html>

@@ -13,6 +13,8 @@ function leerCarrito() {
 // Guarda el array del carrito en localStorage (JSON.stringify lo convierte a texto)
 function guardarCarrito(carrito) {
   localStorage.setItem(CLAVE_CARRITO, JSON.stringify(carrito));
+  // NUEVO: si el carrito cambia sin internet, queda "pendiente" de enviarse
+  if (!navigator.onLine) marcarPendiente(true);
 }
 
 // NUEVO: muestra un aviso (toast) que aparece, se queda unos segundos y desaparece solo.
@@ -65,6 +67,10 @@ function agregarAlCarrito(producto) {
   guardarCarrito(carrito);
   pintarCarrito();
   mostrarToast(`Agregaste ${producto.nombre} al carrito`); // NUEVO
+
+  // NUEVO (paso 15): aviso del navegador, solo si el usuario ya dio permiso.
+  // La función vive en js/notificaciones.js; se comprueba por si ese archivo no está cargado.
+  if (typeof notificarProductoAgregado === "function") notificarProductoAgregado(producto.nombre);
 }
 
 // Sube o baja la cantidad de un producto ya en el carrito con los botones +/-;
@@ -143,29 +149,100 @@ function manejarClicCarrito(evento) {
   if (boton.dataset.accion === "quitar") quitarDelCarrito(id);
 }
 
-// "Sincronizar": en una app real esto haría un fetch() con method: "POST" al
-// servidor. Aquí lo simulamos para enseñar el patrón offline -> online.
-function sincronizarCarrito() {
+// ---- Sincronización (paso 14) ----
+// "Pendiente" = el carrito cambió o se quiso sincronizar mientras no había
+// internet. Se guarda en localStorage para que no se pierda si cierras la pestaña.
+const CLAVE_PENDIENTE = "kristal-bubble-bar-pendiente";
+
+function hayPendiente() {
+  return localStorage.getItem(CLAVE_PENDIENTE) === "1";
+}
+
+function marcarPendiente(valor) {
+  if (valor) localStorage.setItem(CLAVE_PENDIENTE, "1");
+  else localStorage.removeItem(CLAVE_PENDIENTE);
+}
+
+// Simula el envío al servidor. En una app real aquí iría:
+// fetch("https://mi-api.com/carrito", { method: "POST", headers: {...}, body: JSON.stringify(carrito) })
+function enviarCarrito(carrito) {
+  return new Promise((resolver) => {
+    console.log("Enviando carrito al servidor (simulado):", carrito);
+    setTimeout(() => resolver({ ok: true }), 800);
+  });
+}
+
+// Envía el carrito si hay conexión; si no, lo deja pendiente.
+// desdeReconexion = true cuando se llama porque volvió el internet.
+async function sincronizarCarrito(desdeReconexion = false) {
   const mensaje = document.getElementById("carrito-mensaje");
+  const carrito = leerCarrito();
 
   if (!navigator.onLine) {
     // navigator.onLine: propiedad del navegador que dice si hay conexión
+    marcarPendiente(true);
     mensaje.textContent = "Sin conexión: el carrito se sincronizará cuando vuelva el internet.";
     return;
   }
 
-  // Aquí iría: fetch("https://mi-api.com/carrito", { method: "POST", body: ... })
-  mensaje.textContent = "Carrito sincronizado con el servidor (simulado). ✓";
+  if (carrito.length === 0) {
+    marcarPendiente(false);
+    mensaje.textContent = "Tu carrito está vacío, no hay nada que sincronizar.";
+    return;
+  }
+
+  mensaje.textContent = "Sincronizando carrito…";
+  try {
+    await enviarCarrito(carrito);
+    marcarPendiente(false);
+    mensaje.textContent = "Carrito sincronizado con el servidor (simulado). ✓";
+    mostrarToast(desdeReconexion
+      ? "Volvió la conexión: tu carrito se sincronizó"
+      : "Carrito sincronizado correctamente");
+  } catch (error) {
+    marcarPendiente(true);
+    mensaje.textContent = "No se pudo sincronizar. Lo intentaremos cuando haya conexión.";
+  }
+}
+
+// Pone en la pastilla de arriba a la izquierda "conectado" o "sin conexión"
+function actualizarEstadoConexion() {
+  const pastilla = document.getElementById("estado-conexion");
+  if (!pastilla) return; // por si el indicador no está en el HTML
+  const enLinea = navigator.onLine;
+  pastilla.textContent = enLinea ? "conectado" : "sin conexión";
+  pastilla.classList.toggle("pill--offline", !enLinea);
+}
+
+// Evento "online": volvió el internet. Solo se envía si había algo pendiente.
+function alVolverConexion() {
+  actualizarEstadoConexion();
+  if (hayPendiente()) {
+    document.getElementById("carrito-mensaje").textContent = "Volvió la conexión: enviando tu carrito…";
+    sincronizarCarrito(true);
+  } else {
+    mostrarToast("Volvió la conexión");
+  }
+}
+
+// Evento "offline": se perdió el internet.
+function alPerderConexion() {
+  actualizarEstadoConexion();
+  document.getElementById("carrito-mensaje").textContent = "Se perdió la conexión. Tus cambios se guardan en este dispositivo.";
+  mostrarToast("Sin conexión");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   pintarCarrito();
+  actualizarEstadoConexion(); // muestra el estado correcto desde que abre la página
   document.getElementById("carrito-lista").addEventListener("click", manejarClicCarrito);
-  document.getElementById("btn-sincronizar").addEventListener("click", sincronizarCarrito);
+  // () => ... para no pasarle el objeto del clic como parámetro a sincronizarCarrito
+  document.getElementById("btn-sincronizar").addEventListener("click", () => sincronizarCarrito());
 
   // Estos dos eventos del navegador avisan cuando se pierde o regresa la conexión
-  window.addEventListener("online", sincronizarCarrito);
-  window.addEventListener("offline", () => {
-    document.getElementById("carrito-mensaje").textContent = "Se perdió la conexión.";
-  });
+  window.addEventListener("online", alVolverConexion);
+  window.addEventListener("offline", alPerderConexion);
+
+  // Si quedó algo pendiente de una visita anterior y ya hay internet, se envía al abrir
+  if (navigator.onLine && hayPendiente()) sincronizarCarrito(true);
 });
