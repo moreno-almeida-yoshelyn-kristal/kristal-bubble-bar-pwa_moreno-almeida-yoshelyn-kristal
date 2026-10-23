@@ -663,3 +663,13 @@ main > .carrito {
   font-size: 1rem;
   line-height: 1;
 }
+@media (min-width: 901px) {
+  main { grid-template-rows: auto 1fr; }
+
+  /* el menú ocupa las dos filas de la izquierda */
+  main > section.panel { grid-row: 1 / span 2; }
+
+  /* carrito arriba a la derecha y distancia justo debajo */
+  main > section.carrito  { grid-column: 2; grid-row: 1; position: static; }
+  main > section.distancia { grid-column: 2; grid-row: 2; }
+}
