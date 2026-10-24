@@ -5,28 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kristal Bubble Bar — Catálogo</title>
   <meta name="description" content="Kristal Bubble Bar: frappés, smoothies y bubble tea. Catálogo de productos, carrito de compras y ubicación de la sucursal, disponible incluso sin conexión.">
-
-  <!-- AVANCE 3: estas 3 líneas convierten el sitio en una PWA instalable (descomentar cuando existan manifest.json e icons/icon.svg) -->
+  <!-- AVANCE 3: estas 3 líneas convierten el sitio en una PWA instalable -->
   <link rel="manifest" href="manifest.json"> 
   <meta name="theme-color" content="#6EE7B7">
   <!-- <link rel="icon" href="icons/icon.svg" type="image/svg+xml"> -->
-
-   <!-- Ícono de la pestaña y de iPhone -->
+  <!-- Ícono de la pestaña y de iPhone -->
   <link rel="icon" href="icons/icon-192.png" type="image/png">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
-
-  <!-- Tipografía con serifas (la misma de tu menú) -->
+  <!-- Tipografía con serifas-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <link rel="stylesheet" href="css/estilos.css">
-
-  <!-- AVANCE 3: Leaflet (mapas) para geolocalizacion.js -->
-  
 </head>
 <body>
-
   <!-- Burbujas decorativas que suben de abajo hacia arriba -->
   <div class="burbujas" aria-hidden="true">
     <span style="--x:2%;  --t:30px; --c:rgba(110,231,183,.50); --d:15s; --r:-2s"></span>
@@ -41,36 +34,18 @@
     <span style="--x:68%; --t:42px; --c:rgba(125,211,252,.45); --d:17s; --r:-4s"></span>
     <span style="--x:72%; --t:30px; --c:rgba(110,231,183,.50); --d:9s;  --r:-7s"></span>
     <span style="--x:77%; --t:52px; --c:rgba(249,168,212,.55); --d:20s; --r:-10s"></span>
-
-    <!-- Lado derecho, con más colores -->
-    <span style="--x:80%; --t:24px; --c:rgba(168,85,247,.30);  --d:12s; --r:-2s"></span>
-    <span style="--x:83%; --t:46px; --c:rgba(125,211,252,.40); --d:18s; --r:-8s"></span>
-    <span style="--x:86%; --t:34px; --c:rgba(110,231,183,.50); --d:15s; --r:-5s"></span>
-    <span style="--x:89%; --t:52px; --c:rgba(249,168,212,.50); --d:19s; --r:-13s"></span>
-    <span style="--x:91%; --t:20px; --c:rgba(168,85,247,.28);  --d:10s; --r:-3s"></span>
-    <span style="--x:93%; --t:38px; --c:rgba(125,211,252,.45); --d:16s; --r:-9s"></span>
-    <span style="--x:95%; --t:28px; --c:rgba(110,231,183,.55); --d:13s; --r:-6s"></span>
-    <span style="--x:96%; --t:48px; --c:rgba(249,168,212,.55); --d:17s; --r:-11s"></span>
-    <span style="--x:97%; --t:22px; --c:rgba(168,85,247,.30);  --d:11s; --r:-1s"></span>
-    <span style="--x:98%; --t:36px; --c:rgba(110,231,183,.50); --d:14s; --r:-7s"></span>
-    <span style="--x:99%; --t:44px; --c:rgba(249,168,212,.45); --d:18s; --r:-4s"></span>
-    <span style="--x:100%; --t:26px; --c:rgba(125,211,252,.40); --d:15s; --r:-10s"></span>
   </div>
-
   <header class="appbar">
     <!-- Indicador de conexión: lo actualiza carrito.js (conectado / sin conexión) -->
     <span id="estado-conexion" class="pill" role="status" aria-live="polite">conectado</span>
     <img src="img/logo.png" alt="Logo de Kristal Bubble Bar" class="appbar__logo" width="170" height="170">
-
     <h1 class="marca"><span class="marca__a">Kristal</span> <span class="marca__b">Bubble Bar</span></h1>
     <p class="lema">Frappés, smoothies y bubble tea</p>
   </header>
-
   <main>
     <!-- ---- Sección 1: Catálogo (CSR) ---- -->
     <section class="panel">
       <h2 class="titulo-pill">Nuestro menú</h2>
-
       <!-- Producto estrella (csr.js llena precio y foto desde catalogo.json) -->
       <article class="destacado">
         <div class="destacado__texto">
@@ -87,7 +62,6 @@
           <img id="destacado-img" src="img/brown-sugar.jpg" alt="Brown Sugar Milk Tea" width="240" height="300">
         </div>
       </article>
-
       <div id="catalogo" class="grid" aria-busy="true" aria-label="Cargando catálogo">
         <div class="producto producto--cargando" aria-hidden="true">
           <div class="producto__foto"></div>
@@ -111,8 +85,6 @@
         </div>
       </div>
     </section>
-
-
     <!-- Carrito: se coloca a la derecha, a la altura donde empieza el menú -->
     <section class="carrito">
       <h2 class="titulo-pill">Carrito</h2>
@@ -120,7 +92,6 @@
       <p>Total: $<span id="carrito-total">0</span></p>
       <button id="btn-sincronizar" type="button">Sincronizar carrito</button>
       <p id="carrito-mensaje" class="mensaje"></p>
-
       <!-- Notificaciones (paso 15): botón para pedir permiso; las envía js/notificaciones.js -->
       <div class="notificaciones">
         <p class="notificaciones__texto">Recibe un aviso cuando agregues un pedido.</p>
@@ -128,8 +99,6 @@
         <p id="notificaciones-mensaje" class="mensaje"></p>
       </div>
     </section>
-
-
     <!-- Ubicación (paso 16): geolocalizacion.js dibuja el mapa y la ruta hasta la sucursal -->
     <section class="distancia">
       <h2 class="titulo-pill">Distancia a la sucursal</h2>
@@ -139,10 +108,8 @@
       <div id="mapa-ruta" class="mapa" hidden></div>
     </section>
   </main>
-
   <footer class="pie">
   <div class="pie__info">
-
     <div class="pie__item">
       <svg class="pie__icono" viewBox="0 0 48 48" aria-hidden="true">
         <circle cx="24" cy="24" r="19" fill="#fde4f1" stroke="#F9A8D4" stroke-width="4"/>
@@ -150,7 +117,6 @@
       </svg>
       <p><strong>Horario: Lun-Dom</strong><br>11 am - 9 pm</p>
     </div>
-
     <div class="pie__item">
       <svg class="pie__icono" viewBox="0 0 48 48" aria-hidden="true">
         <path d="M24 44S10 29 10 19a14 14 0 0 1 28 0c0 10-14 25-14 25z" fill="#fde4f1" stroke="#F9A8D4" stroke-width="4" stroke-linejoin="round"/>
@@ -158,7 +124,6 @@
       </svg>
       <p><strong>Ubicación</strong><br>Av. Banamichi #398</p>
     </div>
-
     <div class="pie__item">
       <span class="pie__iconos" aria-hidden="true">
         <svg class="pie__icono" viewBox="0 0 48 48">
@@ -173,10 +138,8 @@
       </span>
       <p><strong>Redes Sociales</strong><br>@kristal.bubble-tea</p>
     </div>
-
   </div>
 </footer>
-
   <script src="js/carrito.js"></script>
   <script src="js/csr.js"></script>
   <!-- AVANCE 3 -->
@@ -192,6 +155,5 @@
         .catch((error) => console.error("No se pudo registrar el Service Worker:", error));
     }
   </script>
-  
 </body>
 </html>
