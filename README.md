@@ -5,7 +5,7 @@
 | Campo | Datos |
 |---|---|
 | **Nombre completo** | Moreno Almeida Yoshelyn Kristal |
-| **Grupo** | 10-1 |
+| **Grupo** | ING10-1 |
 | **Negocio** | Kristal Bubble Bar |
 | **Giro** | Barra de bebidas frías personalizables |
 | **URL del repositorio** | https://github.com/moreno-almeida-yoshelyn-kristal/kristal-bubble-bar-pwa_moreno-almeida-yoshelyn-kristal |
