@@ -15,8 +15,8 @@
   <!-- Tipografía con serifas-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
@@ -38,7 +38,7 @@
   <header class="appbar">
     <!-- Indicador de conexión: lo actualiza carrito.js (conectado / sin conexión) -->
     <span id="estado-conexion" class="pill" role="status" aria-live="polite">conectado</span>
-    <img src="img/logo.png" alt="Logo de Kristal Bubble Bar" class="appbar__logo" width="170" height="170">
+    <img src="img/logo.png" alt="Logo de Kristal Bubble Bar" class="appbar__logo" width="170" height="170" fetchpriority="high">
     <h1 class="marca"><span class="marca__a">Kristal</span> <span class="marca__b">Bubble Bar</span></h1>
     <p class="lema">Frappés, smoothies y bubble tea</p>
   </header>
@@ -59,7 +59,7 @@
         </div>
         <div class="destacado__foto">
           <span class="destacado__insignia">🔥 #1 Más vendido</span>
-          <img id="destacado-img" src="img/brown-sugar.jpg" alt="Brown Sugar Milk Tea" width="240" height="300">
+            <img id="destacado-img" src="img/brown-sugar.jpg" alt="Brown Sugar Milk Tea" width="240" height="300" fetchpriority="high">
         </div>
       </article>
       <div id="catalogo" class="grid" aria-busy="true" aria-label="Cargando catálogo">
