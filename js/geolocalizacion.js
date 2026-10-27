@@ -42,7 +42,7 @@ async function obtenerRuta(origenLat, origenLon) {
   const url =
     "https://router.project-osrm.org/route/v1/driving/" +
     `${origenLon},${origenLat};${SUCURSAL.lon},${SUCURSAL.lat}` +
-    "?overview=full&geometry=geojson";
+      "?overview=full&geometries=geojson";
 
   try {
     const respuesta = await fetch(url);
