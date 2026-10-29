@@ -96,3 +96,14 @@
 
 ### sw.js: Workbox precachea el catálogo y las fotos
 ![Código fuente sw.js](docs/captura-sw.png)
+
+## Versión publicada (avance 4)
+
+### index.html en GitHub Pages
+![Código fuente publicado](docs/captura-pages-index.png)
+
+### manifest.json en GitHub Pages
+![manifest.json publicado](docs/captura-pages-manifest.png)
+
+### Mi app instalada en el celular
+![App instalada en el celular](docs/captura-celular.png)
