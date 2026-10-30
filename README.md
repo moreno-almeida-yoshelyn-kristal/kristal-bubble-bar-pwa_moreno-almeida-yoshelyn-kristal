@@ -18,7 +18,34 @@
 | 1 | f7b3e31 | 10/10/2026 |
 | 2 | 71de7bd | 16/10/2026 |
 | 3 | 40fb03c | 23/10/2026 |
-| 4 | (se escribe en el reporte PDF) | (fecha) |
+| 4 | (se escribe en el reporte PDF) | (30/10/2026) |
+
+## Comparación SSR vs CSR
+
+### SSR (Django): los productos llegan escritos en el HTML
+![Código fuente SSR](docs/captura-ssr.png)
+
+### CSR (JavaScript): el div del catálogo llega vacío
+![Código fuente CSR](docs/captura-csr.png)
+
+## Funciones PWA (avance 3)
+
+### index.html: manifest y registro del Service Worker activos
+![Código fuente index.html](docs/captura-index-pwa.png)
+
+### sw.js: Workbox precachea el catálogo y las fotos
+![Código fuente sw.js](docs/captura-sw.png)
+
+## Versión publicada (avance 4)
+
+### index.html en GitHub Pages
+![Código fuente publicado](docs/captura-pages-index.png)
+
+### manifest.json en GitHub Pages
+![manifest.json publicado](docs/captura-pages-manifest.png)
+
+### Mi app instalada en el celular
+![App instalada en el celular](docs/captura-celular.png)
 
 ## Guía de instalación y uso
 
@@ -80,30 +107,3 @@
 
 1. Mantén presionado el ícono de Kristal Bubble Bar.
 2. Selecciona **Desinstalar** y confirma la acción si te lo solicita el dispositivo.
-
-## Comparación SSR vs CSR
-
-### SSR (Django): los productos llegan escritos en el HTML
-![Código fuente SSR](docs/captura-ssr.png)
-
-### CSR (JavaScript): el div del catálogo llega vacío
-![Código fuente CSR](docs/captura-csr.png)
-
-## Funciones PWA (avance 3)
-
-### index.html: manifest y registro del Service Worker activos
-![Código fuente index.html](docs/captura-index-pwa.png)
-
-### sw.js: Workbox precachea el catálogo y las fotos
-![Código fuente sw.js](docs/captura-sw.png)
-
-## Versión publicada (avance 4)
-
-### index.html en GitHub Pages
-![Código fuente publicado](docs/captura-pages-index.png)
-
-### manifest.json en GitHub Pages
-![manifest.json publicado](docs/captura-pages-manifest.png)
-
-### Mi app instalada en el celular
-![App instalada en el celular](docs/captura-celular.png)
